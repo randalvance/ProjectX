@@ -1,0 +1,30 @@
+﻿@model ViewTransactionsViewModel
+@{
+    ViewBag.Title = "View Transactions";
+}
+
+<h2>Transactions</h2>
+<table class="table table-condensed">
+    <thead>
+        <tr>
+            <th>Transaction Date</th>
+            <th>Transaction Type</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Balance</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var transaction in Model.Transactions)
+        {
+            <tr class="@(transaction.TransactionType.ToString().ToLower())">
+                <th>@transaction.TransactionDate</th>
+                <th>@transaction.TransactionType.ToString()</th>
+                <th>@transaction.Description</th>
+                <th>@transaction.Amount</th>
+                <th>@transaction.Balance</th>
+            </tr>
+        }
+
+    </tbody>
+</table>

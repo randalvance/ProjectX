@@ -1,0 +1,15 @@
+﻿@model TransactionViewModel
+@{
+    var transactionType = Model.Type == TransactionViewModel.TransactionType.Deposit ? "Deposit" :
+                    Model.Type == TransactionViewModel.TransactionType.Widthraw ? "Widthraw" : "Transfer";
+
+    ViewBag.Title = "Success";
+}
+
+<h2>@transactionType Successful</h2>
+
+<p class="message">The amount of <b>@($"{Model.Amount:C}")</b> was successfully 
+    @(Model.Type == TransactionViewModel.TransactionType.Deposit ? "deposited to your account." : 
+        Model.Type == TransactionViewModel.TransactionType.Widthraw ? "widthrawn from your account" : $"transferred to account {(Model as TransferViewModel)?.DestinationAccountNumber}")</p>
+
+<a asp-controller="Home" asp-action="Index" class="btn btn-default">Return Home</a>

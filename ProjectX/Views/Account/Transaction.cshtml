@@ -1,0 +1,41 @@
+﻿@model TransactionViewModel
+@{
+    var transactionType = Model.Type == TransactionViewModel.TransactionType.Deposit ? "Deposit" :
+                    Model.Type == TransactionViewModel.TransactionType.Widthraw ? "Widthraw" : "Transfer";
+
+    ViewBag.Title = transactionType;
+}
+
+
+<form asp-controller="Account" asp-action="@(Model.Type.ToString())" method="post" class="form-horizontal">
+    <h1>@transactionType</h1>
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="AccountNumber" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input type="hidden" asp-for="AccountNumber" class="form-control" />
+            <p class="form-control-static">@Model.AccountNumber</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Balance" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input type="hidden" asp-for="Balance" class="form-control" />
+            <p class="form-control-static">@Model.Balance.ToString("C")</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Amount" class="col-md-2 control-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Amount" class="form-control" />
+            <span asp-validation-for="Amount" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-default">@transactionType</button>
+        </div>
+    </div>
+</form>
